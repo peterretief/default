@@ -1,0 +1,81 @@
+{% extends base_layout %}
+
+{% block header_title %}
+<a href="/">Home</a>
+
+<a href="/secure">Add files</a>
+{% endblock %}
+
+{% block content %}
+ 
+<table class="table table-bordered table-condensed">
+    <thead>
+    <tr bgcolor="#808080">
+    <th>booking_number</th>
+    <th>container</th>
+    <th>sfx</th>
+    <th>commodity</th>
+    <th>disch_port</th>
+    <th>temp</th>
+    <th>code</th>
+    <th>vents</th>
+    <th>empty_dsp</th>
+    <th>count</th>
+    </tr>
+    </thead>
+    <tbody>
+
+<tr>
+{% for s in l %}
+<td>{{s.booking_number}}</td>
+
+{% if s.container_status %}
+<td style="background-color:#00FF00">{{s.container_number}}</td>
+{% else %}
+<td style="background-color:#FF0000">{{s.container_number}}</td>
+{% endif %}
+
+<td>{{s.sfx}}</td>
+<td>{{s.commodity}}</td>
+<td>{{s.disch_port}}</td>
+
+{% if s.temp_status %}
+
+<td style="background-color:#00FF00">{{s.temp}}</td>
+
+{% else %}
+
+<td style="background-color:#FF0000">{{s.temp}}</td>
+
+{% endif %}
+
+{% if s.code_status %}
+
+<td style="background-color:#00FF00">{{s.code}}</td>
+
+{% else %}
+
+<td style="background-color:#FF0000">{{s.code}}</td>
+
+{% endif %}
+
+{% if s.vents_status %}
+
+<td style="background-color:#00FF00">{{s.vents}}</td>
+
+{% else %}
+
+<td style="background-color:#FF0000">{{s.vents}}</td>
+
+{% endif %}
+
+
+<td>{{s.empty_dsp}}</td>
+<td>{{s.count}}</td>
+<td>{{s.sheet}}</td>
+</tr>
+{% endfor %}
+
+
+
+{% endblock %}
