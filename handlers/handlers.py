@@ -306,12 +306,23 @@ def updateContainerStatus(manifest_key):
 				sh = wb.sheet_by_name(ind[4])
 
 				row = sh.row(int(ind[2]))
-#				col = sh.col(int(ind[3]))
-                                #cell = sh.cell()
 				cell = sh.cell_value(int(ind[2]), (int(ind[3]))+2) 
+				set_temp = sh.cell_value(int(ind[2]), (int(ind[3]))+3)
+
 
 				num = map(int, re.findall(r'\d+', dat.vents))
 				cell_num = map(int, re.findall(r'\d+', cell))
+
+				temp_num = map(int, re.findall(r'\d+', dat.temp))
+				set_num = map(int, re.findall(r'\d+', str(set_temp)))
+
+				if (temp_num == set_num):
+					dat.temp_status=True
+					dat.put()
+				elif (set_temp == dat.temp):
+					dat.temp_status=True
+					dat.put()
+
 
 #				print "mapped: "+str(num)
 #				print "cell: "+str(cell)
@@ -324,10 +335,6 @@ def updateContainerStatus(manifest_key):
 					dat.vents_status=True
 					dat.put()					
 
-#				if (vents):
-#					dat.vents_status=True
-#					dat.put()
-					
 				temp = index_search("row=%i AND text=%s" % (ind[2], dat.temp), index.name)
 				if (temp):
 					dat.temp_status=True
